@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0c100f">
+  <title>$title</title>
+  <meta name="description" content="$description">
+  <meta property="og:title" content="$title">
+  <meta property="og:description" content="$description">
+  <meta property="og:type" content="$og_type">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="mohan 的工作室">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/site.js" defer></script>
+</head>
+<body class="$body_class" id="top">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="mohan 的工作室首页">mohan<span>.</span><span class="brand-note">的工作室</span></a>
+      <div class="header-controls"><button class="motion-toggle" type="button" aria-label="暂停动效" aria-pressed="false" hidden>动效：开</button><button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation" hidden>菜单<span aria-hidden="true" class="menu-lines"></span></button></div>
+      <nav id="primary-navigation" class="primary-nav" aria-label="主导航">$navigation</nav>
+    </div>
+  </header>
+  <div class="reading-progress" aria-hidden="true" hidden><span></span></div>
+  <main id="main" tabindex="-1">$content</main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand footer-brand" href="/">mohan<span>.</span></a>
+      <p>把想法做出来，把经验留下来。</p>
+      <div class="footer-end"><span>© 2026 mohan</span><a href="#top">回到顶部</a></div>
+    </div>
+  </footer>
+</body>
+</html>

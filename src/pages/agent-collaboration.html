@@ -1,0 +1,24 @@
+<div class="container">
+  <nav class="breadcrumb" aria-label="面包屑"><a href="/work/">全部实践</a><span>/</span>跨仓 Agent 协作</nav>
+  <header class="detail-header"><p class="eyebrow">CASE 02 / AI ENGINEERING</p><h1>让两个 Agent<br>有据可查地协作。</h1><p class="lead">前后端分别在不同仓库，由各自的 Agent 负责。我需要让问题能被接收、修复和核验，也需要明确每个 Agent 可以修改的范围。</p></header>
+  <dl class="case-facts"><div><dt>实践类型</dt><dd>跨仓协作协议</dd></div><div><dt>迭代阶段</dt><dd>规则迭代至 v3</dd></div><div><dt>核心依据</dt><dd>问题 ID · 分支 · commit</dd></div></dl>
+  <div class="detail-layout">
+    <div class="prose">
+      <h2 id="problem">交接需要一个共同的事实</h2>
+      <p>两个 Agent 分别完成工作之后，协作还没有自然结束。对方读的是哪一个版本？问题应该由哪边负责？换一台机器，能否继续同一件事？这些问题都需要明确答案。</p>
+      <p>我的做法是把已推送的远端分支与 commit SHA 定为正式交接依据。一次交接要能指向具体版本，接收方才知道自己正在核对什么。</p>
+      <h2 id="method">同一个问题，沿着责任流转</h2>
+      <figure class="flow-chart"><ol><li><b>01 / REPORT</b><strong>登记问题</strong><small>写清问题 ID、证据和来源版本。</small></li><li><b>02 / RESOLVE</b><strong>接收与修复</strong><small>责任方沿用同一个 ID，回填提交。</small></li><li><b>03 / VERIFY</b><strong>核验结果</strong><small>发现方读取修复版本，验证并闭环。</small></li></ol><figcaption>每个 Agent 只写自己的仓；其他位置保留指向权威记录的引用。</figcaption></figure>
+      <p>每个 Agent 只修改自己的仓。问题交给责任方后，发现方的记录收缩成指针；接收方沿用同一个问题 ID，不再重新编号。这样才能追踪它从哪里来、由谁处理、在哪个版本修复。</p>
+      <p>不同位置不重复维护同一份问题正文，也不各自声明“当前状态”。责任不清楚时，留给人判断，而不是让两个 Agent 来回转交。</p>
+      <h2 id="iteration">v3 修掉了一个环境假设</h2>
+      <p>早期方案把本机固定路径当成协作基础。换机器之后，这个前提就不可靠了。v3 因此移除了两仓必须同机、路径必须固定的假设，把恢复依据放回远端记录。</p>
+      <p>本机存在对方仓时，可以在核对仓库身份与提交后加速读取；没有本地副本，也不改变正式交接依据。机器路径只影响读取方式，不再决定事实是什么。</p>
+      <h2 id="limits">流程需要授权与人工接续</h2>
+      <p>最终沉淀的是一份协作协议。它明确了交接对象、写入范围和验证过程，但仍需要人触发继续，并对合并等动作单独授权。</p>
+      <p>工作流中的“只读”是一条执行纪律，不是技术层面的权限隔离。这套机制也有维护成本，适合确实存在多个写入者、跨仓交接或跨设备恢复需求的项目。</p>
+      <div class="related-block"><p class="eyebrow">RELATED READING</p><a href="/writing/agent-handoff/">两个 Agent 协作，先说清什么算交接</a><a href="/writing/docs-with-code/">集中文档之后，交接文档先过时了</a></div>
+    </div>
+    <aside class="side-note" aria-label="本页内容"><h2>这次实践</h2><a href="#problem">共同的事实依据</a><a href="#method">问题怎样流转</a><a href="#iteration">跨设备的教训</a><a href="#limits">适用范围与边界</a><p>先说清责任和版本，再让协作继续。</p></aside>
+  </div>
+</div>

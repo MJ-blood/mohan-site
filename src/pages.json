@@ -1,0 +1,9 @@
+[
+  {"route":"/","source":"home.html","section":"home","class":"home-page","title":"mohan 的工作室 · 实践、写作与思考","description":"我是 mohan，一名技术与产品人。用 AI 把想法做出来，把实践写成可复用的方法。这里记录我的项目、写作和思考。"},
+  {"route":"/work/","source":"work.html","section":"work","title":"实践 · mohan 的工作室","description":"从个人知识库到跨仓 Agent 协作，记录问题、选择、做法与边界。"},
+  {"route":"/work/fuxi-mini/","source":"fuxi-mini.html","section":"work","class":"case-page","title":"fuxi-mini：把素材变成可写内容 · mohan","description":"一个用 Markdown、AI 与脚本协作的个人知识库实践：保存原料，提炼判断，连接旧知，产出选题。"},
+  {"route":"/work/agent-collaboration/","source":"agent-collaboration.html","section":"work","class":"case-page","title":"让两个 Agent 有据可查地协作 · mohan","description":"一次跨仓 Agent 协作协议实践：用明确版本、同一问题 ID 与独立写入范围组织交接。"},
+  {"route":"/writing/","source":"writing.html","section":"writing","title":"文章 · mohan 的工作室","description":"关于 AI 工程、知识管理和产品实践的文章。按主题浏览，或搜索一段你想找到的内容。","class":"writing-page"},
+  {"route":"/about/","source":"about.html","section":"about","title":"关于我 · mohan 的工作室","description":"我是 mohan，做技术和产品，也写下实践中的发现。关注 AI 编程、知识管理和自媒体写作。"},
+  {"route":"/404.html","source":"404.html","section":"none","title":"没有找到这一页 · mohan 的工作室","description":"这条路径下没有内容。可以回到 mohan 的工作室，看看实践与文章。"}
+]
