@@ -26,8 +26,8 @@ const updateMotion = () => {
   motionToggle.hidden = false;
   motionToggle.disabled = reducedMotion.matches;
   motionToggle.setAttribute('aria-pressed', String(paused || reducedMotion.matches));
-  motionToggle.setAttribute('aria-label', reducedMotion.matches ? '已跟随系统减少动效' : paused ? '播放动效' : '暂停动效');
-  motionToggle.textContent = reducedMotion.matches ? '动效：减' : paused ? '动效：关' : '动效：开';
+  motionToggle.title = reducedMotion.matches ? '已跟随系统减少动态效果' : '减少页面入场、插画与交互的动态效果';
+  motionToggle.textContent = reducedMotion.matches ? '已跟随系统减少动效' : '减少动效';
 };
 const restoreMotion = () => {
   try { paused = localStorage.getItem(motionKey) === 'true'; } catch { /* Keep the in-memory choice. */ }
@@ -44,27 +44,6 @@ window.addEventListener('pageshow', restoreMotion);
 window.addEventListener('storage', event => { if (event.key === motionKey || event.key === null) restoreMotion(); });
 updateMotion();
 
-// One entrance per content group. Article headers/body and archive rows never wait to appear.
-if ('IntersectionObserver' in window) {
-  const hero = document.querySelector('.hero-layout');
-  if (hero) animate(hero, [{ opacity: .65, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320 });
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      if (!entry.target.contains(document.activeElement)) {
-        animate(entry.target, [{ opacity: .5, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320 });
-      }
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: .06 });
-  document.querySelectorAll('.home-writing .article-list, .work-grid, .loop-panel, .now-grid').forEach(group => {
-    if (group.getBoundingClientRect().top >= innerHeight) observer.observe(group);
-  });
-  const loopObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => entry.target.classList.toggle('is-in-view', entry.isIntersecting));
-  });
-  document.querySelectorAll('.loop-panel').forEach(panel => loopObserver.observe(panel));
-}
 // Keyboard focus must land on a stable, visible element.
 document.addEventListener('focusin', event => {
   [...animations].forEach(animation => {

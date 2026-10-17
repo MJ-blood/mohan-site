@@ -8,5 +8,5 @@ const { post, archive = false } = Astro.props;
   <div class="article-row-content">
     <h3>{post.title}</h3><p>{post.summary}</p>
     <div class="article-date"><PostDate post={post} /><span>约 {post.minutes} 分钟</span><span class="article-category">{post.tags[0] ?? '随笔'}</span></div>
-  </div><span class="article-arrow" aria-hidden="true">↗</span>
+  </div>
 </a>

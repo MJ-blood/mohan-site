@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/site.css';
+import '../styles/presentation.css';
 interface Props { title: string; description: string; section: string; bodyClass?: string; article?: boolean }
 const { title, description, section, bodyClass, article = false } = Astro.props;
 ---
@@ -10,8 +11,21 @@ const { title, description, section, bodyClass, article = false } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0c100f" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101512" media="(prefers-color-scheme: dark)" />
+    <script is:inline>
+      // Apply a saved choice before styles paint; without one, CSS follows the system.
+      try {
+        const theme = localStorage.getItem('mohan-theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+          document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
+            meta.content = theme === 'light' ? '#faf9f6' : '#101512';
+          });
+        }
+      } catch { /* System colors work even when storage is unavailable. */ }
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />

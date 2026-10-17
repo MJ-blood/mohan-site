@@ -10,6 +10,6 @@
 - 参考站只提供视觉方向；不复制其代码、品牌、图片、二维码、备案号或商业内容。
 - 正文与导航在禁用 JavaScript 时也须可用；适配手机、键盘和减少动态效果偏好。
 - 使用 Node.js 24.x、Astro 与 TypeScript 严格检查；依赖通过 `package.json` 和 `package-lock.json` 固定，仅安装到项目目录。Markdown 使用 Astro 的 Unified 处理器与站点插件，正文内 HTML 作为文字展示，元数据使用 YAML 安全解析与 schema 校验。网站当前输出静态资源，无外部脚本依赖。
-- 验证入口见 README：`npm run check`、`npm test`、`npm run build`、`npm run test:browser`，覆盖桌面与手机的文章查找、目录、导航、动效和无 JavaScript 阅读。
+- 验证入口见 README：`npm run check`、`npm test`、`npm run build`、`npm run test:browser`，覆盖桌面与手机的文章查找、目录、导航、明暗主题、动效偏好和无 JavaScript 阅读。
 - 暂存材料只放 `.tmp/` 并排除 Git；浏览器测试报告可放其中，不能成为站点依赖。
-- 提交、推送、部署均需对应授权；当前只授权本地开发和架构迁移。删除、凭据、全局依赖与系统配置遵守用户红线。
+- 提交、推送、部署均需当前任务的对应授权。删除、凭据、全局依赖与系统配置遵守用户红线。

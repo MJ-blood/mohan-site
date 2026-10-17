@@ -3,8 +3,8 @@ import SiteLayout from '../../../layouts/SiteLayout.astro';
 ---
 <SiteLayout title="让两个 Agent 有据可查地协作 · mohan" description="一次跨仓 Agent 协作协议实践：用明确版本、同一问题 ID 与独立写入范围组织交接。" section="work" bodyClass="case-page">
 <div class="container">
-  <nav class="breadcrumb" aria-label="面包屑"><a href="/work/">全部实践</a><span>/</span>跨仓 Agent 协作</nav>
-  <header class="detail-header"><p class="eyebrow">CASE 02 / AI ENGINEERING</p><h1>让两个 Agent<br>有据可查地协作。</h1><p class="lead">前后端分别在不同仓库，由各自的 Agent 负责。我需要让问题能被接收、修复和核验，也需要明确每个 Agent 可以修改的范围。</p></header>
+  <nav class="breadcrumb" aria-label="面包屑"><a href="/work/">作品与实践</a><span>/</span>跨仓 Agent 协作</nav>
+  <header class="detail-header"><p class="eyebrow">实践记录 · AI 协作</p><h1>让两个 Agent<br>有据可查地协作。</h1><p class="lead">前后端分别在不同仓库，由各自的 Agent 负责。我需要让问题能被接收、修复和核验，也需要明确每个 Agent 可以修改的范围。</p></header>
   <dl class="case-facts"><div><dt>实践类型</dt><dd>跨仓协作协议</dd></div><div><dt>迭代阶段</dt><dd>规则迭代至 v3</dd></div><div><dt>核心依据</dt><dd>问题 ID · 分支 · commit</dd></div></dl>
   <div class="detail-layout">
     <div class="prose">
@@ -21,7 +21,7 @@ import SiteLayout from '../../../layouts/SiteLayout.astro';
       <h2 id="limits">流程需要授权与人工接续</h2>
       <p>最终沉淀的是一份协作协议。它明确了交接对象、写入范围和验证过程，但仍需要人触发继续，并对合并等动作单独授权。</p>
       <p>工作流中的“只读”是一条执行纪律，不是技术层面的权限隔离。这套机制也有维护成本，适合确实存在多个写入者、跨仓交接或跨设备恢复需求的项目。</p>
-      <div class="related-block"><p class="eyebrow">RELATED READING</p><a href="/writing/agent-handoff/">两个 Agent 协作，先说清什么算交接</a><a href="/writing/docs-with-code/">集中文档之后，交接文档先过时了</a></div>
+      <div class="related-block"><p class="eyebrow">相关阅读</p><a href="/writing/agent-handoff/">两个 Agent 协作，先说清什么算交接</a><a href="/writing/docs-with-code/">集中文档之后，交接文档先过时了</a></div>
     </div>
     <aside class="side-note" aria-label="本页内容"><h2>这次实践</h2><a href="#problem">共同的事实依据</a><a href="#method">问题怎样流转</a><a href="#iteration">跨设备的教训</a><a href="#limits">适用范围与边界</a><p>先说清责任和版本，再让协作继续。</p></aside>
   </div>

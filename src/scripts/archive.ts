@@ -1,5 +1,5 @@
 import { required } from './dom';
-import { animate, canAnimate } from './motion';
+import { animate } from './motion';
 const archive = document.querySelector('[data-archive]');
 if (archive) {
   const index = JSON.parse(required('#article-search-index').textContent ?? '{}') as Record<string, { text: string; tags: string[] }>;
@@ -15,7 +15,6 @@ if (archive) {
   let topic = '';
   let pickerAnimation: Animation | null;
   let pickerOpen = false;
-  let rowAnimations: Animation[] = [];
   const setPicker = (open: boolean, restoreFocus = false) => {
     pickerOpen = open;
     pickerAnimation?.cancel();
@@ -35,11 +34,7 @@ if (archive) {
   picker.addEventListener('keydown', event => {
     if (event.key === 'Escape') { event.preventDefault(); setPicker(false, true); }
   });
-  const update = (writeUrl = true, motion = true) => {
-    const elements = [...rows, ...groups.map(group => required('h2', group))];
-    const before = new Map(elements.filter(element => element.getClientRects().length).map(element => [element, element.getBoundingClientRect().top]));
-    rowAnimations.forEach(animation => animation.cancel());
-    rowAnimations = [];
+  const update = (writeUrl = true) => {
     const words = normalize(input.value.trim()).split(/\s+/).filter(Boolean);
     let count = 0;
     rows.forEach(row => {
@@ -57,17 +52,6 @@ if (archive) {
     required('[data-topic-label]', archive).textContent = topic || '全部';
     required('#result-count', archive).textContent = `共 ${count} 篇`;
     required('.archive-empty', archive).hidden = count > 0;
-    if (motion && canAnimate()) elements.forEach(element => {
-      if (!element.getClientRects().length) return;
-      const previous = before.get(element);
-      const delta = previous === undefined ? 6 : previous - element.getBoundingClientRect().top;
-      if (previous !== undefined && Math.abs(delta) < .5) return;
-      const animation = animate(element, [
-        { transform: `translateY(${delta}px)`, opacity: previous === undefined ? .3 : 1 },
-        { transform: 'none', opacity: 1 },
-      ]);
-      if (animation) rowAnimations.push(animation);
-    });
     if (writeUrl) {
       const url = new URL(location.href);
       input.value.trim() ? url.searchParams.set('q', input.value.trim()) : url.searchParams.delete('q');
@@ -79,7 +63,7 @@ if (archive) {
     const params = new URLSearchParams(location.search);
     input.value = params.get('q') || '';
     topic = params.get('topic') || '';
-    update(false, false);
+    update(false);
   };
   required('.archive-tools', archive).hidden = false;
   required('.search-form', archive).addEventListener('submit', event => { event.preventDefault(); update(); });
