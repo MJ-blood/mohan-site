@@ -1,0 +1,19 @@
+---
+interface Props { section: string }
+const { section } = Astro.props;
+const navigation = [
+  { section: 'home', href: '/', label: '首页' },
+  { section: 'writing', href: '/writing/', label: '文章' },
+  { section: 'work', href: '/work/', label: '实践' },
+  { section: 'about', href: '/about/', label: '关于' },
+];
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="mohan 的工作室首页">mohan<span>.</span><span class="brand-note">的工作室</span></a>
+    <div class="header-controls"><button class="motion-toggle" type="button" aria-label="暂停动效" aria-pressed="false" hidden>动效：开</button><button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-navigation" hidden>菜单<span aria-hidden="true" class="menu-lines"></span></button></div>
+    <nav id="primary-navigation" class="primary-nav" aria-label="主导航">
+      {navigation.map(item => <a href={item.href} aria-current={section === item.section ? (Astro.url.pathname === item.href ? 'page' : 'location') : undefined}>{item.label}</a>)}
+    </nav>
+  </div>
+</header>

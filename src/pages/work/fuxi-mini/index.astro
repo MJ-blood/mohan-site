@@ -1,0 +1,41 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+---
+<SiteLayout title="fuxi-mini：把素材变成可写内容 · mohan" description="一个用 Markdown、AI 与脚本协作的个人知识库实践：保存原料，提炼判断，连接旧知，产出选题。" section="work" bodyClass="case-page">
+<div class="container">
+  <nav class="breadcrumb" aria-label="面包屑"><a href="/work/">全部实践</a><span>/</span>fuxi-mini</nav>
+  <header class="detail-header"><p class="eyebrow">CASE 01 / KNOWLEDGE</p><h1>fuxi-mini<br>把素材变成可写内容。</h1><p class="lead">收藏的材料越来越多，写作时却仍然需要从头整理。我想做一个能积累判断、连接线索，并帮我找到写作角度的个人知识库。</p></header>
+  <dl class="case-facts"><div><dt>实践类型</dt><dd>个人知识管理</dd></div><div><dt>组成方式</dt><dd>Markdown · AI · Python 脚本</dd></div><div><dt>核心产物</dt><dd>笔记、主题页与选题</dd></div></dl>
+  <section class="case-example" id="example" tabindex="-1" aria-labelledby="example-title">
+    <p class="eyebrow">ONE REAL EXAMPLE / 一次实际整理</p>
+    <h2 id="example-title">一段项目复盘，怎样变成一个选题？</h2>
+    <p class="example-intro">下面是知识库里的一条实际素材链。原料记下发生了什么，笔记留下我的判断，选题提纲再把它变成一个能展开讲的问题。</p>
+    <ol class="sample-chain">
+      <li><span class="sample-stage">01 / 原料摘录</span><h3>交接文档先过时了</h3><p>一份跨仓交接文档还保留着已经失效的限制，各代码仓中的功能文档与状态记录反而准确。项目复盘因此重新划分了文档归属。</p><span class="sample-purpose">保留反例与来源</span></li>
+      <li><span class="sample-stage">02 / 判断笔记</span><h3>正本跟着维护责任走</h3><p>文档该放在哪里，要看它描述的变化由谁负责。将接口与功能文档放在代码仓中，可以随代码一起提交；其他地方保留指针，减少重复维护。</p><span class="sample-purpose">从这次问题，提炼可复用的判断</span></li>
+      <li><span class="sample-stage">03 / 选题提纲</span><h3>我建了个集中文档库，然后看着它率先过时</h3><p>从这次反例出发，写清集中存放为什么看起来合理、在哪里失效，以及后来如何重新划分维护责任。落点是：改动代码时，描述它的文档能否一起更新？</p><span class="sample-purpose">形成写作角度，仍是提纲</span></li>
+    </ol>
+    <p class="sample-note">材料整理于 <time datetime="2026-08-02">2026 年 8 月 2 日</time>。根据实际材料节选整理，已省略私有业务信息；选题提纲不代表已发表文章。</p>
+    <div class="example-reading"><span>继续看这个问题如何展开</span><a class="text-link" href="/writing/docs-with-code/">集中文档之后，交接文档先过时了</a></div>
+  </section>
+  <div class="detail-layout">
+    <div class="prose">
+      <h2 id="problem">先把终点定在“用得出来”</h2>
+      <p>我做技术和产品，也做自媒体写作。同一篇材料，除了值得保存，还需要回答一个更具体的问题：它和我正在做的事有什么关系？</p>
+      <p>fuxi-mini 借鉴了 LLM Wiki 与 fuxi 的思路，把材料加工的过程放在日常积累中。每次输入都尽量留下一点自己的理解，写作时就能从已有判断继续往前走。</p>
+      <h2 id="method">让三层内容各司其职</h2>
+      <figure class="flow-chart"><ol><li><b>01 / RAW</b><strong>保留原料</strong><small>留下来源，让事实能回查。</small></li><li><b>02 / WIKI</b><strong>编译判断</strong><small>写出对我的用途，与旧笔记连接。</small></li><li><b>03 / TOPICS</b><strong>提出角度</strong><small>从连接与分歧中，找到能写的主题。</small></li></ol><figcaption>新素材进入时，回看并更新相关旧笔记与主题页。</figcaption></figure>
+      <p>原料层保存原始材料；笔记层提炼要点与立场；选题层则回答“今天可以写什么”。当多篇笔记围绕同一主题积累起来，再把它们编译成一页当前结论。</p>
+      <p>真正需要认真做的是“往回织”：一篇新材料进来，要判断它补充了什么、与什么产生分歧，哪些旧判断应该更新。标签和索引可以帮助找线索，语义上的关系仍需要判断。</p>
+      <h2 id="result">这次整理，多留下了什么</h2>
+      <p>上面的原料最初只记录了一次项目中的问题。整理之后，笔记留下“让文档归属与维护责任对应”的判断，提纲则把这个判断变成可以展开的文章结构。下一次遇到文档归属问题，可以从这条判断继续核对；下一次写作，也有了具体的起点。</p>
+      <p>索引和基于标签、标题的关联由脚本维护，内容判断交给人与 AI 协作完成。产出选题后仍需要写作与核实，已有笔记也要随新证据更新。</p>
+      <h2 id="limits">保持轻量，也承认边界</h2>
+      <p>网页抓取并不总能成功，遇到限制就用手动粘贴兜底。入库时重读和更新旧笔记同样消耗时间与成本，不能把“编译一次”理解成以后不用维护。</p>
+      <p>这套做法适合我当前的个人积累。库变大之后，可以增加检索和更细的索引。先把内容加工好，与以后怎样找到它，是可以共同解决的两件事。</p>
+      <div class="related-block"><p class="eyebrow">继续了解这套做法</p><a href="/writing/knowledge-to-output/">知识库的终点，是今天能写什么</a><p>从这个具体样例，回到日常积累与写作的方法。</p></div>
+    </div>
+    <aside class="side-note" aria-label="本页内容"><h2>这次实践</h2><a href="#example">看一个真实样例</a><a href="#problem">从写作目标出发</a><a href="#method">三层内容与往回织</a><a href="#result">这次整理的产物</a><a href="#limits">成本与规模边界</a><p>一个持续维护的个人系统。让每一次输入，都有机会变成自己的输出。</p></aside>
+  </div>
+</div>
+</SiteLayout>

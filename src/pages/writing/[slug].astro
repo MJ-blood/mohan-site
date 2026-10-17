@@ -1,0 +1,24 @@
+---
+import { render } from 'astro:content';
+import { getPosts, type Post } from '../../lib/content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PostDate from '../../components/PostDate.astro';
+import PostTags from '../../components/PostTags.astro';
+export async function getStaticPaths() {
+  return (await getPosts()).map(post => ({ params: { slug: post.data.slug }, props: { post } }));
+}
+interface Props { post: Post }
+const { post } = Astro.props;
+const { data } = post;
+const { Content } = await render(post);
+---
+<SiteLayout title={`${data.title} · mohan`} description={data.summary} section="writing" bodyClass="article-page" article>
+  <div class="container article-container">
+    <nav class="breadcrumb" aria-label="面包屑"><a href="/writing/">全部文章</a><span>/</span>{data.tags[0] ?? '随笔'}</nav>
+    <header class="detail-header article-header"><h1>{data.title}</h1><p class="lead">{data.summary}</p><div class="article-meta"><span>mohan</span><PostDate post={data} /><span>约 {data.minutes} 分钟</span><div class="article-tags"><PostTags tags={data.tags} /></div></div></header>
+    <div class="article-layout">
+      {data.headings.length > 0 && <details class="article-toc" id="article-toc" open><summary>本文目录</summary><nav aria-label="文章目录">{data.headings.map(heading => <a class={`toc-h${heading.depth}`} href={`#${encodeURIComponent(heading.slug)}`}>{heading.text}</a>)}</nav></details>}
+      <article class="prose article-body" id="article-start" aria-label="文章正文"><Content /><div class="article-end"><span>读到这里，谢谢你的时间。</span><a href="/writing/">继续浏览全部文章</a></div></article>
+    </div>
+  </div>
+</SiteLayout>

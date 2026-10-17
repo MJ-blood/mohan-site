@@ -1,18 +1,19 @@
 # mohan 的工作室
 
-一个以 Markdown 持续更新的个人写作站。文章归档支持正文搜索、主题筛选与年份分组；文章页自动生成目录，首页自动显示最近更新。保留实践案例与关于页，PC／手机分别适配，页头动效开关会记住跨页选择。
+基于 Astro + TypeScript 的个人写作与作品展示站，使用 Markdown 持续更新。文章归档支持正文搜索、主题筛选与年份分组；文章页自动生成目录，首页自动显示最近更新。保留实践案例与关于页，PC／手机分别适配，页头动效开关会记住跨页选择。
 
 ## 本地使用
 
-Python 3.10+，首次运行时安装项目依赖（不安装到全局）：
+Node.js 24.15+（24.x），版本入口为 `.node-version`。依赖只安装到项目目录，使用 npm 和项目锁文件：
 
 ```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python scripts/serve.py --port 4321
+npm ci
+npm run dev
 ```
 
-打开 `http://localhost:4321`。服务启动时构建；新增或修改文章、模板与样式后，刷新浏览器即可看到变化。服务仅监听本机。修改 Python 构建脚本后需重启服务。
+打开 `http://localhost:4321`。开发服务仅监听本机，修改文章、组件或样式后自动更新预览。Windows PowerShell 若拦截 npm.ps1，使用 `npm.cmd` 执行相同命令。
+
+`npm run build` 执行类型检查、静态构建与产物检查；`npm run preview` 预览构建后的 `dist/`。线上只需要静态文件托管，无需运行 Python、Node.js 服务或数据库。
 
 ## 发布一篇文章
 
@@ -37,71 +38,64 @@ tags: [AI 工程, 产品思维]
 
 可选字段：`title`、`summary`、`tags`、`date`（发表日期）、`updated`（更新日期）、`slug`（固定地址）、`draft: true`（不进入公开构建）。日期需要真实填写；没有日期也能展示，不从文件修改时间推断发表日期。按 `updated` 优先、其次 `date` 排序，无日期内容列在后面。阅读时长按正文估算。
 
-支持标题、段落、引用、嵌套列表、链接、图片、代码块、表格与删除线。正文从 `##` 开始；使用 `## 标题 {#stable-id}` 可固定锚点。不执行正文内的 HTML／脚本，暂不支持 MDX、数学公式或脚注扩展。
+支持标题、段落、引用、嵌套列表、链接、图片、代码块、表格与删除线。正文从 `##` 开始；使用 `## 标题 {#stable-id}` 可固定锚点。不执行正文内的 HTML／脚本，不启用 MDX 或数学公式插件。
 
 图片可放在文章旁的子目录，例如 `content/posts/images/example.png`，正文写 `![图片说明](images/example.png)`。构建只复制实际引用的图片／PDF，不复制整个知识库。文章之间可以写相对链接，例如 `[继续阅读](knowledge-to-output.md#judgment)`。
 
-本地保存刷新只更新本地预览。正式网站更新时，构建生成 `dist/`，将它部署到选定的托管服务；当前尚未部署，也未配置自动发布。删除／改名文章、取消图片或 PDF 引用后，若有遗留页面或附件，构建会报错；先核对这些文件，再使用新的输出目录，不会自动删除文件。
+本地保存刷新只更新本地预览。正式网站更新时，构建生成 `dist/`，将它部署到选定的托管服务；当前尚未部署，也未配置自动发布。Astro 每次构建重新生成 dist/，删除／改名文章、转为草稿或取消附件引用后，旧页面和旧附件不会继续留在新产物中。dist/ 只能保存派生产物。
 
 ## 修改入口
 
 | 内容 | 唯一正本 |
 | --- | --- |
 | 文章正文、标题、摘要、主题、日期 | `content/posts/**/*.md` |
-| 非文章页面路由与元数据 | `src/pages.json` |
-| 首页、归档、案例、关于页模板 | `src/pages/*.html` |
-| 导航、页脚与共享布局 | `src/layout.html`、`scripts/build.py` |
-| 视觉、响应式与交互 | `src/assets/site.css`、`src/assets/site.js` |
-| Markdown 读取、列表与目录派生 | `scripts/articles.py` |
+| 页面路由与元数据 | `src/pages/**/*.astro` |
+| 导航、页脚、文章卡片等 | `src/components/` |
+| 共享页面布局 | `src/layouts/SiteLayout.astro` |
+| 视觉与响应式 | `src/styles/site.css` |
+| 浏览器交互 | `src/scripts/` 中的 TypeScript 模块 |
+| 内容集合、加载与查询 | `src/content.config.ts`、`src/loaders/posts.ts`、`src/lib/content.ts` |
+| 文章格式规则与 Markdown 插件 | `src/lib/post-source.ts`、`src/lib/markdown.ts` |
+| 直接公开的静态文件 | `public/`，禁止放源稿或私人资料 |
 | 项目约定 | [PROJECT_RULES.md](PROJECT_RULES.md) |
 | 产品与视觉决策、参考网站 | [docs/design.md](docs/design.md) |
 | 文案依据与事实边界 | [docs/content-sources.md](docs/content-sources.md) |
 
-`dist/` 是派生产物，禁止手改。三份旧文章 HTML 只保留迁移指针，不再承担正文或参与构建。私人知识库不会被自动读取或公开。
+`dist/` 是派生产物，禁止手改。文章正文只维护 Markdown。私人知识库不会被自动读取或公开。
 
 ## 验证
 
 ```bash
-.venv/bin/python scripts/build.py
-.venv/bin/python scripts/check.py
-.venv/bin/python -m unittest discover -s tests -v
-node --check src/assets/site.js
+npm run check
+npm test
+npm run build
+npm run test:browser
 ```
 
-行为测试在隔离临时目录覆盖新增／更新 Markdown、普通文件与元数据、中文文件名、目录锚点、图片和相对文章链接、草稿排除、错误输入、转义、旧产物检测，以及预览保存刷新、并发读取与错误恢复。
+`check` 检查 Astro 与 TypeScript；`test` 在 .tmp/ 隔离目录验证内容规则、真实构建和开发预览；`build` 检查页面结构、资源、链接、锚点与草稿公开范围。浏览器测试使用已安装的 Edge，报告保存在 `.tmp/browser-report/`。其他系统可设置 `BROWSER_CHANNEL=chrome` 使用本机 Chrome；没有浏览器时需另行准备，不能将该检查记为通过。
 
 ## 当前状态
 
-- 本轮 PC／手机排版与动效调整：完成，已通过下方本地验证。Markdown 文件发布方式保持不变。
-- 文案：根据已有知识库改写，待 mohan 最终发布审阅；日期使用本次整理日期，不补造历史发表记录。
-- 公开联系方式：未设置。
-- 发布：未部署，域名与托管尚未确定；本地实现不代表线上验收。
+- Astro + TypeScript 迁移完成，保留现有 10 个页面、3 篇文章、访问地址和视觉；已通过下方本地验证。
+- 文案根据已有知识库改写，仍待 mohan 最终发布审阅；不补造历史发表记录。
+- 公开联系方式未设置；未部署，域名与托管尚未确定。
+- 当前项目目录以 Git 根为准；本轮仅修改本地源码，不提交、推送或发布。
 
-实际项目与 Git 根：`/home/mo/projects/mohan-site`，分支 `main`，尚无提交，暂无 SHA。过程快照和一次性浏览器证据保留在 `.tmp/`，不进入构建。之前布局的验证记录属于历史证据，当前结果以下方记录为准。
-
+历史 Python 实现验证已归档至 [2026-10-03 验证记录](docs/archive/2026-10-03-validation.md)，不作为当前架构的验收依据。原源码保留在 [历史源码归档](docs/archive/python-site/README.md)，不参与构建和发布。
 
 ## 本轮验证记录
 
-日期：2026-10-03。首页去掉重复推荐，最近文章与实践成为主线；工作流程、持续关注的问题移到关于页。归档改为顶部搜索与折叠主题菜单，文章列表统一为标题、摘要、元信息。详情页收紧头部，保留桌面侧栏目录和手机折叠目录。动效按内容组进入、交互状态切换分开处理，暂停选择跨页保存。
+日期：2026-10-17。环境：Windows、Node.js 24.15.0、本机 Edge（Chromium）。
 
 | 命令／检查 | 结果 |
 | --- | --- |
-| `.venv/bin/python scripts/build.py` | 退出 0，生成 10 页，其中 3 篇 Markdown 文章 |
-| `PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/check.py` | 退出 0，172 处引用、资源、元数据、锚点及产物一致性通过 |
-| `PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests -v` | 退出 0，18 项行为测试通过 |
-| `node --check src/assets/site.js` | 退出 0 |
-| `node /tmp/mohan-polish/qa.cjs` | 退出 0，81 项浏览器检查通过，无脚本异常或失败请求 |
+| `npm run check` | Astro／TypeScript 检查通过；最终构建内再次检查，0 错误、0 警告 |
+| `npm test` | 退出 0，9 项内容及真实构建／开发预览测试通过 |
+| `npm run build` | 退出 0，10 页、3 篇文章，172 处引用、资源、元数据和锚点检查通过 |
+| `npm run test:browser` | 退出 0，桌面／手机模拟共 8 项测试通过 |
+| `npm audit` | 查询时未发现已知漏洞 |
+| 文档链接、UTF-8 与 `git diff --check` | 通过 |
 
-Chromium 覆盖全部 10 页在 320、390、768、1024、1440px 下的结构与横向溢出；桌面／手机搜索、主题组合、空结果恢复、URL 恢复、浏览器返回、文章标签入口、目录与旧锚点、阅读进度、404，以及 200% 字号、无 JavaScript 阅读。正常动效模式额外检查标题与正文同步可见、筛选位置过渡、快速连续输入、目录反向展开、卡片悬停、暂停跨页与返回恢复、实时减少动效、菜单 Enter／Tab／Escape、跨断点导航与目录状态。最终菜单使用原生 DOM 顺序，避免依赖动画时序转移焦点。
+内容测试覆盖普通 Markdown、中文文件名、元数据校验、自定义／重复锚点、表格、HTML 转义、引用附件、相对文章链接、草稿、改名和旧产物清理；真实开发服务覆盖保存更新、错误恢复与并发读取。浏览器覆盖 10 页在 320、390、768、1024、1440px 下的结构和溢出，以及搜索、主题、URL 恢复、菜单键盘操作、目录、阅读进度、动效记忆和无 JavaScript 阅读。已查看手机首页及桌面文章截图。
 
-布局位置的前后比较（约数，单位 CSS px；PC 1440 × 1000，手机 390 × 844）：
-
-| 内容起点 | PC 调整前 → 后 | 手机调整前 → 后 |
-| --- | --- | --- |
-| 首页首篇文章标题 | 841 → 470 | 726 → 460 |
-| 归档首篇文章标题 | 569 → 429 | 809 → 458 |
-| 文章正文 | 506 → 329 | 611 → 421 |
-
-已实际查看两端首页、归档、详情截图与关于页布局。验证脚本、报告、截图、本轮修改前快照保留在 `.tmp/layout-polish/`；它们不进入构建。脚本依赖本机已有 Playwright／Chromium 的绝对路径，换机需调整。早先 Markdown 格式专项证据保留在 `.tmp/markdown-verification/`，属于历史记录。
-
-最终源码完成只读审阅；发现的手机菜单键盘顺序问题已修复并通过浏览器回归。未验证 Safari、Firefox、真实手机、屏幕阅读器或线上部署；内容发布审阅仍待 mohan 完成。
+上述结果属于本地验收。Safari、Firefox、真实手机、屏幕阅读器及线上部署未验证。浏览器报告和截图位于 `.tmp/browser-report/`、`.tmp/browser-results/`，不进入版本控制或公开构建。

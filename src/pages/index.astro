@@ -1,0 +1,28 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { getPosts } from '../lib/content';
+import PostCard from '../components/PostCard.astro';
+const posts = await getPosts();
+---
+<SiteLayout title="mohan 的工作室 · 实践、写作与思考" description="我是 mohan，一名技术与产品人。用 AI 把想法做出来，把实践写成可复用的方法。这里记录我的项目、写作和思考。" section="home" bodyClass="home-page">
+<section class="hero">
+  <div class="container hero-layout">
+    <div class="hero-title"><p class="eyebrow">MOHAN / 技术 · 产品 · 写作</p><h1>把想法做出来。<span>把经验留下来。</span></h1></div>
+    <div class="hero-intro"><p class="hero-description">我是 <strong>mohan</strong>，做技术与产品。<br>用 AI 做工具，把实践写成可复用的方法。</p><a class="text-link" href="/about/">更多关于我 <span aria-hidden="true">↗</span></a></div>
+  </div>
+</section>
+<section class="section writing-section home-writing" id="writing" tabindex="-1" aria-labelledby="writing-title">
+  <div class="container">
+    <div class="section-heading"><h2 id="writing-title">最近文章<span class="section-note">实践中的做法与反思</span></h2><a class="text-link" href="/writing/">全部文章 <span aria-hidden="true">↗</span></a></div>
+    <div class="article-list">{posts.slice(0, 3).map(post => <PostCard post={post.data} />)}{posts.length === 0 && <p class="muted">文章正在整理中。</p>}</div>
+  </div>
+</section>
+<section class="section container home-work" id="work" tabindex="-1" aria-labelledby="work-title">
+  <div class="section-heading"><h2 id="work-title">动手做过的事<span class="section-note">从一个实际问题开始</span></h2><a class="text-link" href="/work/">全部实践 <span aria-hidden="true">↗</span></a></div>
+  <div class="work-grid home-work-grid">
+    <a class="work-card" href="/work/fuxi-mini/#example"><div class="work-card-body"><div class="meta-line"><span>知识管理</span><span>个人工具</span></div><h3>fuxi-mini · 让知识用得出来</h3><p>从一段项目复盘，到一个可写的选题。看看原料、判断和提纲之间，究竟多了哪一步。</p><div class="card-end"><span>查看真实样例 <span aria-hidden="true">↗</span></span><code>01</code></div></div></a>
+    <a class="work-card" href="/work/agent-collaboration/"><div class="work-card-body"><div class="meta-line"><span>AI 工程</span><span>协作机制</span></div><h3>让两个 Agent 有据可查地协作</h3><p>从版本、责任到交接，把多仓协作里容易说不清的事情，一件件讲明白。</p><div class="card-end"><span>阅读实践记录 <span aria-hidden="true">↗</span></span><code>02</code></div></div></a>
+  </div>
+</section>
+<div class="container home-about"><p>读一点，想清楚，再做出来。<span>让新的实践，继续修正旧的判断。</span></p><a class="text-link" href="/about/#approach">我的工作方式 <span aria-hidden="true">↗</span></a></div>
+</SiteLayout>

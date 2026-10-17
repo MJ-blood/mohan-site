@@ -1,0 +1,5 @@
+---
+interface Props { tags: string[] }
+const { tags } = Astro.props;
+---
+{tags.map(tag => <a class="tag-link" href={`/writing/?topic=${encodeURIComponent(tag)}`}>{tag}</a>)}

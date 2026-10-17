@@ -1,0 +1,32 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/site.css';
+interface Props { title: string; description: string; section: string; bodyClass?: string; article?: boolean }
+const { title, description, section, bodyClass, article = false } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0c100f" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="mohan 的工作室" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <script>import '../scripts/site';</script>
+  </head>
+  <body class={bodyClass} id="top">
+    <a class="skip-link" href="#main">跳到正文</a>
+    <Header section={section} />
+    <div class="reading-progress" aria-hidden="true" hidden><span></span></div>
+    <main id="main" tabindex="-1"><slot /></main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,7 @@
+---
+import { sortDate, type PostData } from '../lib/post-source';
+interface Props { post: PostData }
+const { post } = Astro.props;
+const date = sortDate(post);
+---
+{date && <span>{post.updated ? '更新于' : '发表于'} <time datetime={date}>{date.replaceAll('-', '.')}</time></span>}

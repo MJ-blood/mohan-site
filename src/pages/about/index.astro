@@ -1,0 +1,39 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+<SiteLayout title="关于我 · mohan 的工作室" description="我是 mohan，做技术和产品，也写下实践中的发现。关注 AI 编程、知识管理和自媒体写作。" section="about" bodyClass="">
+<div class="container">
+  <header class="page-intro"><p class="eyebrow">ABOUT / 关于我</p><h1>你好，我是 mohan<span class="muted">。</span></h1><p>一名技术与产品人。做工具，写文章，也整理实践留下的问题。</p></header>
+  <div class="about-layout">
+    <div class="prose">
+      <p>我把 AI 用在编程、知识管理和自媒体写作里。关注的事情通常很具体：一个想法怎样变成能用的东西，一份经验怎样留下来，几个协作者怎样把事情接着做下去。</p>
+      <p>这个站点用来记录这些实践。你会看到已经形成的做法，也会看到它们的适用范围，以及我为什么修正过原来的判断。</p>
+      <h2>我在意的几件事</h2>
+      <h3>先弄清楚要解决什么</h3><p>做产品、搭知识库或制定协作规则，都先从实际问题出发。把目标说清楚，才能决定最小需要做哪一步，以及怎样知道它有用。</p>
+      <h3>让结论能找到依据</h3><p>区分原始材料、自己的推论和已经验证的结果。说到哪里，就留到哪里的依据；不确定的部分，也明确记下来。</p>
+      <h3>把经验留给下一次</h3><p>用文章整理判断，用工具减少重复步骤，用清楚的记录继续上一次工作。它们是我希望长期积累的东西。</p>
+      <div class="related-block"><p class="eyebrow">A GOOD PLACE TO START</p><a href="/work/fuxi-mini/">从 fuxi-mini 认识我的知识管理方式</a><a href="/writing/docs-with-code/">读一次改变了我判断的工程经历</a></div>
+    </div>
+    <aside class="about-aside" aria-label="个人简介"><div class="monogram" aria-hidden="true">m.</div><p><strong>mohan</strong><br>技术与产品人</p><p>把实践写下来，<br>让思考继续往前走。</p><ul class="about-tags"><li>AI 编程</li><li>知识管理</li><li>自媒体写作</li><li>产品实践</li></ul></aside>
+  </div>
+</div>
+<section class="container workflow-section" id="approach" tabindex="-1" aria-label="我的工作方式">
+  <div class="loop-panel">
+    <div class="panel-caption"><span>我的工作方式</span></div>
+    <ol class="loop-steps">
+      <li><span class="step-number">01</span><div><strong>读一点</strong><small>带着问题收集素材</small></div></li>
+      <li><span class="step-number">02</span><div><strong>想清楚</strong><small>连接线索，形成判断</small></div></li>
+      <li><span class="step-number">03</span><div><strong>做出来</strong><small>变成工具、文章和方法</small></div></li>
+    </ol>
+    <p class="loop-return">让新的实践，继续修正旧的判断。</p>
+  </div>
+</section>
+<section class="section container now-section" id="now" aria-labelledby="now-title">
+  <div class="section-heading"><h2 id="now-title">持续关注的问题</h2></div>
+  <div class="now-grid">
+    <div class="now-item"><span class="small-label">01 / ENGINEERING</span><h3>AI 怎样进入真实项目？</h3><p>从一段能跑的代码，到能交接、能验证、能持续维护的工作方式。</p></div>
+    <div class="now-item"><span class="small-label">02 / KNOWLEDGE</span><h3>积累怎样变成自己的东西？</h3><p>在新材料与旧判断之间来回编织，让每一次输入都有机会成为输出。</p></div>
+    <div class="now-item"><span class="small-label">03 / MAKING</span><h3>一个想法，最小能做到哪一步？</h3><p>从具体需求出发，用一个小工具、一篇文章或一次实验，把想法落下来。</p></div>
+  </div>
+</section>
+</SiteLayout>

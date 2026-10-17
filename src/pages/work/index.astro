@@ -1,0 +1,15 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+<SiteLayout title="实践 · mohan 的工作室" description="从个人知识库到跨仓 Agent 协作，记录问题、选择、做法与边界。" section="work" bodyClass="">
+<div class="container">
+  <header class="page-intro"><p class="eyebrow">WORK / 实践记录</p><h1>一些想法，<br>已经有了具体的样子。</h1><p>从自己遇到的问题出发。这里记录我做过的工具与协作实践，包括选择、过程，以及它们的边界。</p></header>
+  <section class="listing-section" aria-label="实践案例">
+    <div class="work-grid">
+      <a class="work-card" href="/work/fuxi-mini/"><div class="work-visual" aria-hidden="true"><div class="visual-topline"><span>FUXI-MINI</span><span>KNOWLEDGE / 01</span></div><div class="note-line"><span>一篇原始素材</span><code>RAW</code></div><div class="note-line"><span>一条自己的判断</span><code>WIKI</code></div><div class="note-line"><span>一个可写的角度</span><code>TOPIC</code></div></div><div class="work-card-body"><div class="meta-line"><span>知识管理</span><span>个人工具</span></div><h3>fuxi-mini · 让知识用得出来</h3><p>把素材编译成带判断的笔记，连接旧知，再从中长出今天能写的内容。</p><div class="card-end"><span>阅读实践记录</span><code>CASE 01</code></div></div></a>
+      <a class="work-card" href="/work/agent-collaboration/"><div class="work-visual agent-visual" aria-hidden="true"><div class="visual-topline"><span>AGENT COLLABORATION</span><span>V3</span></div><div class="agent-pair"><div class="agent-box"><small>REPO A</small><strong>前端 Agent</strong></div><div class="handoff-line"></div><div class="agent-box"><small>REPO B</small><strong>后端 Agent</strong></div></div><p class="handoff-label">同一个问题 ID · 明确的 commit</p></div><div class="work-card-body"><div class="meta-line"><span>AI 工程</span><span>协作机制</span></div><h3>让两个 Agent 有据可查地协作</h3><p>从版本、责任到交接，把多仓协作里容易说不清的事情，一件件讲明白。</p><div class="card-end"><span>阅读实践记录</span><code>CASE 02</code></div></div></a>
+    </div>
+    <p class="listing-note">每个案例都从一个真实问题开始。做法会继续变化，记录里保留当时的选择，也说明哪些问题还没有解决。</p>
+  </section>
+</div>
+</SiteLayout>
