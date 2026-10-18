@@ -5,17 +5,23 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
   <div class="container about-container">
     <header class="page-intro"><p class="eyebrow">关于我</p><h1>你好，我是 mohan。</h1><p>做技术与产品，也写下实践中的发现。</p></header>
     <div class="prose about-body">
-      <p>我把 AI 用在编程、知识管理和自媒体写作里。这个站点记录我做过的工具、遇到的问题，以及在实践中逐渐形成的判断。</p>
+      <p>这里记录我做过的工具、遇到的问题，以及在实践中逐渐形成的判断。</p>
       <h2 id="now">最近关注</h2>
       <ul class="about-focus">
         <li><strong>AI 编程</strong><span>怎样让 AI 参与真实项目，并把工作清楚地交接下去。</span></li>
         <li><strong>知识管理</strong><span>怎样让收藏的材料变成自己的理解，再变成可写的内容。</span></li>
         <li><strong>产品实践</strong><span>怎样从一个具体需求出发，把想法做成能用的东西。</span></li>
       </ul>
+      <section class="about-reading" aria-labelledby="start-reading">
+        <h2 id="start-reading">从这些内容开始</h2>
+        <div class="about-reading-grid">
+          <a href="/work/fuxi-mini/"><span class="eyebrow">看一次实践</span><h3>把素材变成可写内容<span aria-hidden="true"> →</span></h3><p>看一段项目复盘如何经过整理，形成一个写作选题。</p></a>
+          <a href="/writing/docs-with-code/"><span class="eyebrow">读一篇文章</span><h3>交接文档先过时了<span aria-hidden="true"> →</span></h3><p>一次让我重新思考文档维护方式的经历。</p></a>
+        </div>
+      </section>
       <h2 id="approach">我的工作方式</h2>
       <p>先弄清楚问题，再做一个足够小的尝试。把事实、推论和已经验证的结果分开记录；有了新证据，就回头修正原来的判断。</p>
       <p>文章用来整理这些判断，工具用来减少重复步骤。这里也会记录成本和限制，让下一次实践有据可循。</p>
-      <div class="related-block"><h2>从这些内容开始</h2><a href="/work/fuxi-mini/">fuxi-mini：把素材变成可写内容</a><p>看一段项目复盘如何经过整理，形成一个写作选题。</p><a href="/writing/docs-with-code/">集中文档之后，交接文档先过时了</a><p>读一次让我重新思考文档维护方式的经历。</p></div>
     </div>
   </div>
 </SiteLayout>

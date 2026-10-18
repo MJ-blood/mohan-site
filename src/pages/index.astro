@@ -9,7 +9,7 @@ const posts = await getPosts();
 <SiteLayout title="mohan 的工作室 · 实践、写作与思考" description="我是 mohan，做技术与产品。在这里记录 AI 编程、知识管理，以及把想法做成工具的过程。" section="home" bodyClass="home-page">
   <section class="hero" data-ambient>
     <div class="hero-halo ambient" aria-hidden="true"></div>
-    <div class="container hero-layout">
+    <div class="container showcase-container hero-layout">
       <div class="hero-copy" data-reveal>
         <p class="hero-kicker"><span></span>技术 · 产品 · 写作</p>
         <h1>把想法做出来。<span>把经验留下来。</span></h1>
@@ -19,11 +19,11 @@ const posts = await getPosts();
       <div class="hero-studio" data-reveal data-reveal-delay="120"><StudioScene /></div>
     </div>
   </section>
-  <section class="section container home-writing" id="writing" tabindex="-1" aria-labelledby="writing-title">
+  <section class="section container showcase-container home-writing" id="writing" tabindex="-1" aria-labelledby="writing-title">
     <div class="section-heading" data-reveal><div><p class="section-kicker">记录与思考</p><h2 id="writing-title">最近文章</h2></div><a class="text-link" href="/writing/">全部文章<span aria-hidden="true">→</span></a></div>
     <div class="article-list" data-reveal>{posts.slice(0, 3).map(post => <PostCard post={post.data} />)}{posts.length === 0 && <p class="muted">文章正在整理中。</p>}</div>
   </section>
-  <section class="section container home-work" id="work" tabindex="-1" aria-labelledby="work-title">
+  <section class="section container showcase-container home-work" id="work" tabindex="-1" aria-labelledby="work-title">
     <div class="section-heading" data-reveal><div><p class="section-kicker">动手做过的事</p><h2 id="work-title">作品与实践</h2><p class="section-description">从实际问题出发，让想法有具体的样子。</p></div><a class="text-link" href="/work/">全部作品<span aria-hidden="true">→</span></a></div>
     <div class="work-grid"><WorkCard kind="knowledge" /><WorkCard kind="collaboration" /></div>
   </section>

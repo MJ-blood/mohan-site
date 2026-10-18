@@ -3,11 +3,10 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import WorkCard from '../../components/WorkCard.astro';
 ---
 <SiteLayout title="作品与实践 · mohan 的工作室" description="个人工具与实践记录：从遇到的问题、做出的选择，到具体产出与适用边界。" section="work">
-  <div class="container">
-    <header class="page-intro"><h1>作品与实践</h1><p>做过的工具，验证过的方法。<br />记录它们解决的问题、留下的产出，以及仍然存在的边界。</p></header>
+  <div class="container showcase-container">
+    <header class="page-intro"><p class="section-kicker">动手做过的事</p><h1>作品与实践</h1><p>从一个具体问题开始，留下工具、方法与实践中的判断。</p></header>
     <section class="listing-section" aria-label="作品与实践">
       <div class="work-grid"><WorkCard kind="knowledge" /><WorkCard kind="collaboration" /></div>
-      <p class="listing-note">这里既有个人工具，也有协作方法的实践记录。每个案例里都保留了具体做法与适用范围。</p>
     </section>
   </div>
 </SiteLayout>

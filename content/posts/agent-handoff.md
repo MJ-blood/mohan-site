@@ -39,5 +39,5 @@ tags: ["AI 工程", "协作实践"]
 
 ## 延伸阅读
 
-- [让两个 Agent 有据可查地协作](/work/agent-collaboration/)
+- [对应实践：让两个 Agent 有据可查地协作](/work/agent-collaboration/)
 - [继续阅读：集中文档之后，交接文档先过时了](/writing/docs-with-code/)

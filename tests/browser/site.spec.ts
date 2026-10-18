@@ -28,7 +28,7 @@ test('全部页面的明暗主题、资源和响应式布局', async ({ page }, 
   }
   const missing = await page.goto('/this-page-does-not-exist/');
   expect(missing?.status()).toBe(404);
-  await expect(page.locator('h1')).toHaveText('这一页，还没有内容。');
+  await expect(page.locator('h1')).toHaveText('没有找到这一页。');
   expect(errors).toEqual([]);
 });
 
@@ -128,6 +128,39 @@ test('菜单键盘操作、目录、阅读进度和页脚动效偏好', async ({
   await expect(page.locator('html')).toHaveCSS('background-color', colors.dark);
 });
 
+test('案例目录在正文前支持键盘、跳转与响应式切换', async ({ page }, info) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const route of ['/work/fuxi-mini/', '/work/agent-collaboration/']) {
+    await page.setViewportSize({ width: info.project.name === 'mobile' ? 390 : 1440, height: 900 });
+    await page.goto(route);
+    const toc = page.locator('.case-toc');
+    await expect(toc).toHaveJSProperty('open', info.project.name !== 'mobile');
+    if (info.project.name === 'mobile') {
+      const tocBox = await toc.boundingBox();
+      const exampleBox = await page.locator('.case-example').boundingBox();
+      expect(tocBox!.y + tocBox!.height).toBeLessThan(exampleBox!.y);
+      await toc.locator('summary').focus();
+      await page.keyboard.press('Enter');
+    }
+    await toc.locator('a[href="#limits"]').click();
+    await expect(page).toHaveURL(/#limits$/);
+    await expect(page.locator('#limits')).toBeInViewport();
+    await expect(page.locator('.reading-progress')).toBeHidden();
+    await page.setViewportSize({ width: 801, height: 900 });
+    await expect(toc).toHaveJSProperty('open', true);
+    await page.setViewportSize({ width: 800, height: 900 });
+    await expect(toc).toHaveJSProperty('open', false);
+    await toc.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    await expect(toc.locator('nav')).toBeVisible();
+    await page.keyboard.press('Space');
+    await expect(toc.locator('nav')).toBeHidden();
+    await page.setViewportSize({ width: 801, height: 900 });
+    await expect(toc).toHaveJSProperty('open', true);
+    await expect(toc.locator('nav')).toBeVisible();
+  }
+});
+
 test('禁用 JavaScript 仍能以系统主题导航和阅读', async ({ browser }, info) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: info.project.name === 'mobile' ? { width: 390, height: 844 } : { width: 1440, height: 1000 } });
   const page = await context.newPage();
@@ -142,6 +175,13 @@ test('禁用 JavaScript 仍能以系统主题导航和阅读', async ({ browser 
     await expect(page.locator('.article-body')).toContainText('往回织');
     await expect(page.locator('#judgment')).toBeVisible();
     await page.screenshot({ path: `.tmp/browser-results/${info.project.name}-article-${theme}-no-js.png`, fullPage: true });
+    for (const route of ['/work/fuxi-mini/', '/work/agent-collaboration/']) {
+      await page.goto('http://127.0.0.1:4322' + route);
+      await expect(page.locator('.case-toc nav')).toBeVisible();
+      await page.locator('.case-toc a[href="#limits"]').click();
+      await expect(page.locator('#limits')).toBeInViewport();
+      await expect(page.locator('.case-body')).toContainText('成本');
+    }
   }
   await context.close();
 });

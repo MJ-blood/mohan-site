@@ -39,5 +39,5 @@ tags: ["文档治理", "工程反思"]
 
 ## 延伸阅读
 
-- [两个 Agent 协作，先说清什么算交接](/writing/agent-handoff/)
+- [继续阅读：两个 Agent 协作，先说清什么算交接](/writing/agent-handoff/)
 - [对应实践：跨仓 Agent 协作协议](/work/agent-collaboration/)

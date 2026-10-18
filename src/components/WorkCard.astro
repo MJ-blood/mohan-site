@@ -6,16 +6,15 @@ const knowledge = kind === 'knowledge';
 <div class="work-item" data-reveal data-reveal-delay={knowledge ? 0 : 100}>
   <a class:list={['work-card', knowledge ? 'work-card--knowledge' : 'work-card--collaboration']} href={knowledge ? '/work/fuxi-mini/' : '/work/agent-collaboration/'} data-ambient>
     <div class="work-preview" aria-hidden="true">
-      <span class="preview-label">{knowledge ? '把信息连成自己的理解' : '让协作有一个共同的依据'}</span>
+      <span class="preview-label">{knowledge ? '从素材，到自己的判断' : '有据可查，有始有终'}</span>
       {knowledge ? <div class="knowledge-visual">
-        <svg class="work-wires" viewBox="0 0 400 180" fill="none"><path d="M65 40 C130 40 115 90 200 90 M65 90 H330 M65 140 C130 140 115 90 200 90" class="wire-track"/><path d="M65 40 C130 40 115 90 200 90 H330 M65 140 C130 140 115 90 200 90" class="wire-current ambient"/></svg>
-        <div class="source-notes"><span>一个反例<i></i></span><span>一段记录<i></i></span><span>一个问题<i></i></span></div>
+        <svg class="work-wires" viewBox="0 0 400 164" preserveAspectRatio="none" fill="none"><path d="M55 82 H340" class="wire-track"/><path d="M55 82 H340" class="wire-current ambient"/></svg>
+        <div class="source-notes"><span>收集素材<i></i><i></i><i></i></span></div>
         <div class="knowledge-core"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m12 3 8 5v8l-8 5-8-5V8Z M4 8l8 5 8-5 M12 13v8"/></svg><strong>自己的判断</strong></div>
         <div class="output-note"><span>写作选题</span><i></i><i></i><i></i></div>
       </div> : <div class="collaboration-visual">
-        <div class="handoff-caption"><span class="scene-dot"></span> 同一个问题，沿着责任流转</div>
         <div class="collaboration-pair"><div class="collaborator"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="5" width="16" height="14" rx="3"/><path d="m8 10 2 2-2 2m5 0h3"/></svg><strong>发现方</strong><small>问题与证据</small></div><div class="handoff-bridge"><span class="handoff-packet ambient"></span><span>交接</span></div><div class="collaborator"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="5" width="16" height="14" rx="3"/><path d="m8 12 3 3 5-6"/></svg><strong>责任方</strong><small>修复与版本</small></div></div>
-        <div class="handoff-return">核验结果，完成闭环<span aria-hidden="true">⤴</span></div>
+        <div class="handoff-return"><span>核验结果</span><svg viewBox="0 0 280 22" preserveAspectRatio="none" fill="none"><path d="M278 1v8a10 10 0 0 1-10 10H12A10 10 0 0 1 2 9V1m0 0 4 5M2 1l-2 5" /></svg></div>
       </div>}
     </div>
     <div class="work-card-body">

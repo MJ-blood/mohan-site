@@ -41,4 +41,4 @@ fuxi-mini 里有一个重要动作，叫“往回织”。新材料写成笔记�
 
 ## 延伸阅读
 
-- [fuxi-mini：把素材变成可写内容](/work/fuxi-mini/)
+- [对应实践：fuxi-mini，把素材变成可写内容](/work/fuxi-mini/)
